@@ -1,12 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
     <>
       <div className="page">
         <header className="header">
-          <img className="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип" />
+          <img className="header__logo" src="#" alt="Логотип" />
           <div className="header__line"></div>
         </header>
         <main className="content">
@@ -19,10 +16,10 @@ function App() {
             <button type="button" className="profile__edit-button-avatar"></button>
             <div className="profile__info">
               <div className="profile__item">
-                <h1 className="profile__name"></h1>
+                <h1 className="profile__name">Жак-Ив Кусто</h1>
                 <button className="profile__edit-button" type="button"></button>
               </div>
-              <h2 className="profile__description"></h2>
+              <h2 className="profile__description">Иследователь океанов</h2>
             </div>
             <button className="profile__add-button" type="button"></button>
           </section>
@@ -37,7 +34,7 @@ function App() {
                   </button>
                 </div>
                 <div className="card__block">
-                  <h2 className="card__name"></h2>
+                  <h2 className="card__name">1</h2>
                   <button className="card__like" type="button">
                     <p className="card__like_score">0</p>
                   </button>
@@ -168,7 +165,7 @@ function App() {
       <div className="popup popup-FullScreen">
         <div className="popup__container popup__container-FullScreen">
           <img className="popup__img-FullScreen" src="/" alt="/" />
-          <h2 className="popup__title popup__name-FullScreen"></h2>
+          <h2 className="popup__title popup__name-FullScreen">1</h2>
           <button
             className="popup__button-close popup__close-FullScreen popup__close"
             type="button"></button>
