@@ -1,24 +1,37 @@
 import React from 'react';
-import profileAvatar from '../images/photo_profile.jpg';
+import api from '../utils/Api.js';
 
 function Main(props) {
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
+
+  api
+    .getProfile()
+    .then((data) => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+    })
+    .catch((err) => console.log(err));
+
   return (
     <main className="content">
       <section className="profile">
-        <img className="profile__avatar" src={profileAvatar} alt="Аватар профиля" />
+        <img className="profile__avatar" src={userAvatar} alt="Аватар профиля" />
         <button
           type="button"
           className="profile__edit-button-avatar"
           onClick={props.onEditAvatar}></button>
         <div className="profile__info">
           <div className="profile__item">
-            <h1 className="profile__name">Жак-Ив Кусто</h1>
+            <h1 className="profile__name">{userName}</h1>
             <button
               className="profile__edit-button"
               onClick={props.onEditProfile}
               type="button"></button>
           </div>
-          <h2 className="profile__description">Иследователь океанов</h2>
+          <h2 className="profile__description">{userDescription}</h2>
         </div>
         <button className="profile__add-button" onClick={props.onAddPlace} type="button"></button>
       </section>

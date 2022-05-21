@@ -3,6 +3,7 @@ import Header from './components/Header.js';
 import Main from './components/Main.js';
 import Footer from './components/Footer.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import api from './utils/Api';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
