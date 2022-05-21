@@ -2,21 +2,6 @@ import React from 'react';
 import profileAvatar from '../images/photo_profile.jpg';
 
 function Main(props) {
-  const handleEditAvatarClick = () => {
-    const editPopupAvatar = document.querySelector('.popup_edit_avatar');
-    editPopupAvatar.classList.add('popup_opened');
-  };
-
-  const handleEditProfileClick = () => {
-    const editPopupProfile = document.querySelector('.profile-popup');
-    editPopupProfile.classList.add('popup_opened');
-  };
-
-  const handleAddPlaceClick = () => {
-    const AddPopup = document.querySelector('.popup_add');
-    AddPopup.classList.add('popup_opened');
-  };
-
   return (
     <main className="content">
       <section className="profile">
@@ -24,21 +9,18 @@ function Main(props) {
         <button
           type="button"
           className="profile__edit-button-avatar"
-          onClick={handleEditAvatarClick}></button>
+          onClick={props.onEditAvatar}></button>
         <div className="profile__info">
           <div className="profile__item">
             <h1 className="profile__name">Жак-Ив Кусто</h1>
             <button
               className="profile__edit-button"
-              onClick={handleEditProfileClick}
+              onClick={props.onEditProfile}
               type="button"></button>
           </div>
           <h2 className="profile__description">Иследователь океанов</h2>
         </div>
-        <button
-          className="profile__add-button"
-          onClick={handleAddPlaceClick}
-          type="button"></button>
+        <button className="profile__add-button" onClick={props.onAddPlace} type="button"></button>
       </section>
 
       <section className="grid-cards">
