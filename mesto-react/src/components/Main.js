@@ -1,20 +1,38 @@
 import React from 'react';
 import api from '../utils/Api.js';
+import Card from './Card.js';
 
 function Main(props) {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
+  React.useEffect(() => {
+    api.getProfile().then((userData) => {
+      setUserName(userData.name);
+      setUserDescription(userData.about);
+      setUserAvatar(userData.avatar);
+    });
+  }, []);
 
-  api
-    .getProfile()
-    .then((data) => {
-      setUserName(data.name);
-      setUserDescription(data.about);
-      setUserAvatar(data.avatar);
-    })
-    .catch((err) => console.log(err));
-
+  React.useEffect(() => {
+    api
+      .getCards()
+      .then((data) => {
+        console.log(data);
+        setCards(
+          data.map((item) => ({
+            id: item._id,
+            src: item.link,
+            name: item.name,
+            likes: item.likes.length,
+          })),
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <main className="content">
       <section className="profile">
@@ -35,24 +53,10 @@ function Main(props) {
         </div>
         <button className="profile__add-button" onClick={props.onAddPlace} type="button"></button>
       </section>
-
       <section className="grid-cards">
-        <template id="template" className="template">
-          <article className="grid-cards__item card">
-            <button className="card__button-delete" type="button"></button>
-            <div className="card__overlay">
-              <button className="card__open-fullscreen">
-                <img className="card__image" src="/" alt="/" />
-              </button>
-            </div>
-            <div className="card__block">
-              <h2 className="card__name">1</h2>
-              <button className="card__like" type="button">
-                <p className="card__like_score">0</p>
-              </button>
-            </div>
-          </article>
-        </template>
+        {cards.map(({ id, ...props }) => (
+          <Card key={id} {...props} />
+        ))}
       </section>
     </main>
   );
