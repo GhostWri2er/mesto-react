@@ -1,15 +1,15 @@
-import React from 'react';
-import Header from './components/Header.js';
-import Main from './components/Main.js';
-import Footer from './components/Footer.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import ImagePopup from './components/ImagePopup.js';
+import React, { useState } from 'react';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
+import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -48,7 +48,7 @@ function App() {
         <PopupWithForm
           isOpen={isEditProfilePopupOpen}
           name={'profile'}
-          title={'Редактировать профиль'}
+          title="Редактировать профиль"
           onClose={closeAllPopups}
           children={
             <>
@@ -59,8 +59,8 @@ function App() {
                   type="text"
                   name="name"
                   placeholder="Ваше имя"
-                  minlength="2"
-                  maxlength="40"
+                  minLength="2"
+                  maxLength="40"
                   required
                 />
                 <span className="popup__input-error"></span>
@@ -72,8 +72,8 @@ function App() {
                   type="text"
                   name="description"
                   placeholder="Описание"
-                  minlength="2"
-                  maxlength="200"
+                  minLength="2"
+                  maxLength="200"
                   required
                 />
                 <span className="popup__input-error"></span>
@@ -85,7 +85,7 @@ function App() {
         <PopupWithForm
           isOpen={isAddPlacePopupOpen}
           name={'add'}
-          title={'Добавить карточку'}
+          title="Добавить карточку"
           onClose={closeAllPopups}
           children={
             <>
@@ -96,8 +96,8 @@ function App() {
                   type="text"
                   name="place"
                   placeholder="Название"
-                  minlength="2"
-                  maxlength="30"
+                  minLength="2"
+                  maxLength="30"
                   required
                 />
                 <span className="popup__input-error"></span>
@@ -120,7 +120,7 @@ function App() {
         <PopupWithForm
           isOpen={isEditAvatarPopupOpen}
           name={'avatar'}
-          title={'Редактировать аватар'}
+          title="Редактировать аватар"
           onClose={closeAllPopups}
           children={
             <>

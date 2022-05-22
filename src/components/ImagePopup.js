@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ImagePopup({ card, onClose }) {
-  console.log(card);
   return (
     <section className={`popup popup-FullScreen ${card.src ? 'popup_opened' : ''}`}>
       <div className="popup__container popup__container-FullScreen">

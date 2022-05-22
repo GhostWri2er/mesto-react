@@ -8,7 +8,7 @@ function PopupWithForm(props) {
           className={`popup__form-edit popup__form-edit-${props.name}`}
           method="post"
           name={`${props.name}`}
-          novalidate>
+          noValidate>
           <h2 className="popup__title">{props.title}</h2>
           {props.children}
           <button
