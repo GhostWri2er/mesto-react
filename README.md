@@ -4,7 +4,6 @@
 
 ## Мои контакты
 - **Location**: Saint Petersburg, Russia
-- **Phone**: +7 992 021 94 47
 - **Email**: ivanmironovich@vk.com
 - **GitHub**: [GhostWri2er][2]
 - **LinkedIn**: [Ivan Mironovich][3]
