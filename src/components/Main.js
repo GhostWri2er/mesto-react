@@ -13,10 +13,11 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       .then((data) => {
         setCards(
           data.map((item) => ({
-            id: item._id,
+            _id: item._id,
             src: item.link,
             name: item.name,
-            likes: item.likes.length,
+            likes: item.likes,
+            owner: item.owner,
           })),
         );
       })
@@ -24,6 +25,28 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
         console.log(err);
       });
   }, []);
+
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      })
+      .catch((err) => console.log('error', err));
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id).then(() => {
+      setCards((state) => state.filter((c) => c._id !== card._id)).catch((err) =>
+        console.log('error', err),
+      );
+    });
+  }
+
   return (
     <main className="content">
       <section className="profile">
@@ -43,7 +66,13 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       </section>
       <section className="grid-cards">
         {cards.map((card) => (
-          <Card card={card} key={card.id} onCardClick={onCardClick} />
+          <Card
+            card={card}
+            key={card._id}
+            onCardClick={onCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
         ))}
       </section>
     </main>
