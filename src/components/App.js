@@ -3,6 +3,7 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
+import EditProfilePopup from './EditProfilePopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
@@ -46,6 +47,17 @@ function App() {
       .catch((err) => console.log('error', err));
   }, []);
 
+  function handleUpdateUser(data) {
+    const { name, about } = data;
+    api
+      .editProfile(name, about)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => console.log('error', err));
+  }
+
   return (
     <>
       <div className="page">
@@ -58,41 +70,11 @@ function App() {
             onCardClick={handleCardClick}
           />
           <Footer />
-          <PopupWithForm
+
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            name={'profile'}
-            title="Редактировать профиль"
             onClose={closeAllPopups}
-            children={
-              <>
-                <div className="popup__block">
-                  <input
-                    className="popup__input popup__input-name"
-                    id="name-error"
-                    type="text"
-                    name="name"
-                    placeholder="Ваше имя"
-                    minLength="2"
-                    maxLength="40"
-                    required
-                  />
-                  <span className="popup__input-error"></span>
-                </div>
-                <div className="popup__block">
-                  <input
-                    className="popup__input popup__input-description"
-                    id="description-error"
-                    type="text"
-                    name="description"
-                    placeholder="Описание"
-                    minLength="2"
-                    maxLength="200"
-                    required
-                  />
-                  <span className="popup__input-error"></span>
-                </div>
-              </>
-            }
+            onUpdateUser={handleUpdateUser}
           />
 
           <PopupWithForm
