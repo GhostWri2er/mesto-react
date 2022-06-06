@@ -4,6 +4,7 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 import ImagePopup from './ImagePopup.js';
 import api from '../utils/Api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
@@ -51,6 +52,17 @@ function App() {
     const { name, about } = data;
     api
       .editProfile(name, about)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => console.log('error', err));
+  }
+
+  function handleUpdateAvatar(data) {
+    const { avatar } = data;
+    api
+      .updateAvatar(avatar)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -111,26 +123,12 @@ function App() {
               </>
             }
           />
-
-          <PopupWithForm
+          <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
-            name={'avatar'}
-            title="Редактировать аватар"
             onClose={closeAllPopups}
-            children={
-              <>
-                <div className="popup__block">
-                  <input
-                    className="popup__input popup__input-description popup__input-description_add"
-                    type="url"
-                    placeholder="Ссылка на картинку"
-                    required
-                  />
-                  <span className="popup__input-error"></span>
-                </div>
-              </>
-            }
+            onUpdateAvatar={handleUpdateAvatar}
           />
+
           <ImagePopup onClose={closeAllPopups} card={selectedCard} />
         </CurrentUserContext.Provider>
       </div>
