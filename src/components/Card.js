@@ -30,14 +30,18 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         type="button"></button>
       <div className="card__overlay">
         <button className="card__open-fullscreen" onClick={handleClick}>
-          <img className="card__image" src={card.src} alt={card.name} />
+          <img className="card__image" src={card.link} alt={card.name} />
         </button>
       </div>
       <div className="card__block">
         <h2 className="card__name">{card.name}</h2>
-        <button className={cardLikeButtonClassName} onClick={handleLikeClick} type="button">
+        <div className="card__like_container">
+          <button
+            className={cardLikeButtonClassName}
+            onClick={handleLikeClick}
+            type="button"></button>
           <p className="card__like_score">{card.likes.length}</p>
-        </button>
+        </div>
       </div>
     </article>
   );

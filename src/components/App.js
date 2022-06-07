@@ -6,7 +6,7 @@ import AddPlacePopup from './AddPlacePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import ImagePopup from './ImagePopup.js';
-import api from '../utils/Api.js';
+import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
 function App() {
@@ -77,12 +77,12 @@ function App() {
       .getCards()
       .then((data) => {
         setCards(
-          data.map((item) => ({
-            _id: item._id,
-            src: item.link,
-            name: item.name,
-            likes: item.likes,
-            owner: item.owner,
+          data.map((card) => ({
+            _id: card._id,
+            link: card.link,
+            name: card.name,
+            likes: card.likes,
+            owner: card.owner,
           })),
         );
       })
@@ -98,6 +98,7 @@ function App() {
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .changeLikeCardStatus(card._id, !isLiked)
+
       .then((newCard) => {
         setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       })
@@ -123,43 +124,41 @@ function App() {
   }
 
   return (
-    <>
-      <div className="page">
-        <CurrentUserContext.Provider value={currentUser}>
-          <Header />
-          <Main
-            cards={cards}
-            handleCardDelete={handleCardDelete}
-            handleCardLike={handleCardLike}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-          />
-          <Footer />
+    <div className="page">
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header />
+        <Main
+          cards={cards}
+          handleCardDelete={handleCardDelete}
+          handleCardLike={handleCardLike}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+        />
+        <Footer />
 
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
 
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateCards={handleAddPlaceSubmit}
-          />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateCards={handleAddPlaceSubmit}
+        />
 
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-          <ImagePopup onClose={closeAllPopups} card={selectedCard} />
-        </CurrentUserContext.Provider>
-      </div>
-    </>
+        <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+      </CurrentUserContext.Provider>
+    </div>
   );
 }
 

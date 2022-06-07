@@ -48,7 +48,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
               id="name-error"
               type="text"
               name="name"
-              value={name}
+              value={name ?? ''}
               placeholder="Ваше имя"
               minLength="2"
               maxLength="40"
@@ -63,7 +63,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
               id="description-error"
               type="text"
               name="description"
-              value={description}
+              value={description ?? ''}
               placeholder="Описание"
               minLength="2"
               maxLength="200"

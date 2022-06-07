@@ -8,7 +8,7 @@ function PopupWithForm({ name, isOpen, title, onClose, children, onSubmit }) {
           onSubmit={onSubmit}
           className={`popup__form-edit popup__form-edit-${name}`}
           method="post"
-          name={`${name}`}
+          name={name}
           noValidate>
           <h2 className="popup__title">{title}</h2>
           {children}
