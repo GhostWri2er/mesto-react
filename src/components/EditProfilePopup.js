@@ -17,7 +17,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setName(e.target.value);
   }
 
-  function handleNameDescriptionChange(e) {
+  function handleDescriptionChange(e) {
     setDescription(e.target.value);
   }
 
@@ -58,7 +58,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           </div>
           <div className="popup__block">
             <input
-              onChange={handleNameDescriptionChange}
+              onChange={handleDescriptionChange}
               className="popup__input popup__input-description"
               id="description-error"
               type="text"
