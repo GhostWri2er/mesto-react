@@ -15,6 +15,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -69,8 +70,6 @@ function App() {
       })
       .catch((err) => console.log('error', err));
   }
-
-  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api
