@@ -88,8 +88,8 @@ class Api {
     }).then(this._checkRespose);
   }
 
-  changeLikeCardStatus(idCard, isLiked) {
-    return fetch(`${this._baseUrl}cards/${idCard}/likes`, {
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this._baseUrl}cards/${cardId}/likes`, {
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers,
     }).then(this._checkRespose);
